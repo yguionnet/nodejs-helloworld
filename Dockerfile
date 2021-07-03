@@ -1,17 +1,12 @@
-FROM node:9
-
-# Create app directory
+FROM node:12.18.1
+ 
 WORKDIR /app
-
-# Install app dependencies
-COPY package*.json ./
-
+ 
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+ 
 RUN npm install
-
-# Copying rest of the application to app directory
-COPY . /app
-
-# Expose the port and start the application
-Expose 8080
-
-CMD ["npm","start"]
+ 
+COPY . .
+ 
+CMD [ "node", "server.js" ]
